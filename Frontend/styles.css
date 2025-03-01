@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +29,6 @@ body {
     background-color: #fff;
 }
 
-/* Header */
 #header {
     margin-bottom: 30px;
 }
@@ -43,7 +42,7 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* Register Form */
+
 .form-container {
     margin-bottom: 20px;
 }
@@ -84,7 +83,7 @@ button:active {
     transform: scale(0.98);
 }
 
-/* Menu and Content */
+
 #menu, #content {
     margin-top: 20px;
 }
@@ -98,7 +97,7 @@ button {
     display: none;
 }
 
-/* Clue and Options */
+
 #content h2 {
     font-size: 2rem;
     color: #333;
@@ -133,7 +132,7 @@ button {
     transform: scale(0.98);
 }
 
-/* Fun Fact */
+
 #funFact {
     font-style: italic;
     font-size: 1.2rem;
@@ -141,7 +140,7 @@ button {
     margin-top: 20px;
 }
 
-/* End Game Styling */
+
 .endGame {
     font-size: 2rem;
     margin-top: 20px;
@@ -149,7 +148,7 @@ button {
     color: #ff6347;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -175,12 +174,12 @@ button {
     }
 }
 
-/* Style for hidden popup */
+
 .hidden {
     display: none;
 }
 
-/* Style for share popup */
+
 #sharePopup {
     position: fixed;
     top: 50%;

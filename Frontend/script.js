@@ -1,12 +1,11 @@
 let user = JSON.parse(localStorage.getItem("user")) || null;
 let currentDestination = {}; // Store the current destination for the question
 
-// Fetch a single random destination from the backend
+// Fetch destination from the backend
 async function fetchDestination() {
     try {
-        const response = await fetch('https://globetrotter-urtb.onrender.com/api/games/getQuestion'); // Update with your correct URL
+        const response = await fetch('https://globetrotter-urtb.onrender.com/api/games/getQuestion'); 
         const data = await response.json();
-        console.log('API Response:', data[0]); // Log the response to check the structure
 
         if (!data || !data[0].name || !Array.isArray(data[0].clues)) {
             throw new Error('Invalid destination data received.');
@@ -21,7 +20,7 @@ async function fetchDestination() {
     }
 }
 
-// Function to update UI based on user existence
+
 function updateUI() {
     if (user) {
         document.getElementById("register").classList.add("hidden");
@@ -43,7 +42,6 @@ async function registerUser() {
 
     try {
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${username}`);
-        // Update with your correct API
         console.log("response", response)
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');
@@ -78,8 +76,8 @@ async function registerUser() {
                 const userData = await response.json();
                 console.log('User registered:', userData);
 
-                user = userData; // Store user object from response
-                localStorage.setItem("user", JSON.stringify(user)); // Cache in localStorage for session persistence
+                user = userData; 
+                localStorage.setItem("user", JSON.stringify(user));
 
                 updateUI();
             } catch (error) {
@@ -109,7 +107,6 @@ async function showProfile() {
 
     try {
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${user[0].username}`);
-        // Update with your correct API
         console.log("response", response)
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');
@@ -137,7 +134,7 @@ function goBackToMenu() {
     document.getElementById("menu").classList.remove("hidden");
 }
 
-// Start game (fetch new destination and display question)
+// Start game
 async function startGame() {
     if (user.currentScore > 0) {
         user.currentScore = user.currentScore;
@@ -145,8 +142,7 @@ async function startGame() {
         user.currentScore = 0;
 
     }
-    // Reset current score
-    await fetchDestination(); // Fetch the first destination
+    await fetchDestination(); 
 
     console.log("Current Destination:", currentDestination);
 
@@ -156,12 +152,11 @@ async function startGame() {
         return;
     }
 
-    // Generate clues display
+   
     let cluesHtml = currentDestination.clues.map(clue => `<p>${clue}</p>`).join("");
 
-    // Generate options (one correct option and random incorrect options)
-    let options = [currentDestination.name, "Paris", "New York", "Tokyo"]; // Add random incorrect options
-    options = shuffle(options); // Shuffle options to randomize
+    let options = [currentDestination.name, "Paris", "New York", "Tokyo"]; 
+    options = shuffle(options); 
 
     let optionsHtml = options.map(option =>
         `<button class="option" onclick="submitAnswer('${option}')">${option}</button>`
@@ -183,7 +178,7 @@ async function submitAnswer(selectedAnswer) {
         return;
     }
 
-    // Check if funFacts exist
+    
     let funFact = "No fun fact available.";
     if (Array.isArray(currentDestination.funFacts) && currentDestination.funFacts.length > 0) {
         funFact = currentDestination.funFacts[Math.floor(Math.random() * currentDestination.funFacts.length)];
@@ -203,16 +198,15 @@ async function submitAnswer(selectedAnswer) {
     // Store the updated score
     localStorage.setItem("user", JSON.stringify(user));
 
-    // Ask if the user wants to continue with the next question
     let continueGame = confirm("Do you want to continue to the next question?");
     if (continueGame) {
-        await startGame(); // Start a new question
+        await startGame();
     } else {
         endGame(); // End the game
     }
 }
 
-// End the game and compare scores
+// End the game and update high scores
 async function endGame() {
     alert(`Game Over! Your score: ${user.currentScore}`);
     console.log(user)
@@ -246,17 +240,16 @@ async function endGame() {
     goBackToMenu();
 }
 
-// Shuffle the options randomly
+
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        [array[i], array[j]] = [array[j], array[i]]; 
     }
     return array;
 }
 
-// Challenge a friend (Placeholder)
-// Challenge a friend (Share feature)
+
 function generateShareImage() {
     const canvas = document.getElementById('shareImageCanvas');
 
@@ -271,21 +264,17 @@ function generateShareImage() {
         return;
     }
 
-    // Clear canvas before drawing
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw background
-    ctx.fillStyle = '#4CAF50'; // Green background
+    ctx.fillStyle = '#4CAF50'; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Ensure user object exists
     if (!user || !user[0].username ) {
         console.error("User data is missing.");
         return;
     }
 
-    // Draw text (username and score)
-    ctx.fillStyle = '#fff'; // White text color
+    ctx.fillStyle = '#fff';
     ctx.font = '20px Arial';
     ctx.fillText(`Player: ${user[0].username}`, 10, 50);
     ctx.fillText(`Score: ${user[0].highestscore}`, 10, 100);
@@ -307,13 +296,11 @@ function createInviteLink() {
 
 // Function to open the challenge friend popup
 function challengeFriend() {
-    // Retrieve user from localStorage if missing
+
     if (!user) {
         user = JSON.parse(localStorage.getItem("user"));
     }
-    console.log("uu",user)
 
-    // Validate user object
     if (!user || !user[0].username) {
         console.error("User data is missing or invalid.");
         alert("Please log in before challenging a friend.");
@@ -332,7 +319,6 @@ function challengeFriend() {
 }
 
 
-// Function to close the share popup
 function closeSharePopup() {
     const sharePopup = document.getElementById('sharePopup');
     if (sharePopup) {
@@ -344,8 +330,8 @@ function closeSharePopup() {
 
 
 function logoutUser() {
-    localStorage.removeItem("user"); // Remove user data from local storage
-    user = null; // Reset user variable
+    localStorage.removeItem("user"); 
+    user = null; 
 
     // Reset UI to show registration screen
     document.getElementById("register").classList.remove("hidden");
@@ -369,11 +355,11 @@ async function updateUI() {
             console.log("asd", storedUser.username)
             if (!response.ok) throw new Error("Failed to fetch user details");
             console.log("b", response)
-            user = await response.json(); // Update user data with backend response
+            user = await response.json(); 
             console.log("user", user)
-            localStorage.setItem("user", JSON.stringify(user)); // Update local storage
+            localStorage.setItem("user", JSON.stringify(user)); 
 
-            // Update UI
+           
             document.getElementById("register").classList.add("hidden");
             document.getElementById("menu").classList.remove("hidden");
             document.getElementById("content").innerHTML = `
@@ -383,7 +369,7 @@ async function updateUI() {
             `;
         } catch (error) {
             console.error("Error fetching user data:", error);
-            localStorage.removeItem("user"); // Remove invalid user data
+            localStorage.removeItem("user"); 
             user = null;
         }
     }
