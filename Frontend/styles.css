@@ -1,0 +1,213 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#app {
+    max-width: 650px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    background-color: #fff;
+}
+
+/* Header */
+#header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Register Form */
+.form-container {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 15px;
+    width: 75%;
+    margin-bottom: 15px;
+    border: 2px solid #4facfe;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #00f2fe;
+}
+
+button {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Menu and Content */
+#menu, #content {
+    margin-top: 20px;
+}
+
+button {
+    width: 100%;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Clue and Options */
+#content h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#content p {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.option {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    border: none;
+    padding: 15px;
+    width: 80%;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option:hover {
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
+    transform: scale(1.05);
+}
+
+.option:active {
+    transform: scale(0.98);
+}
+
+/* Fun Fact */
+#funFact {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #444;
+    margin-top: 20px;
+}
+
+/* End Game Styling */
+.endGame {
+    font-size: 2rem;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff6347;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    #app {
+        padding: 20px;
+    }
+
+    input, button {
+        width: 100%;
+    }
+
+    .option {
+        width: 100%;
+    }
+}
+
+/* Style for hidden popup */
+.hidden {
+    display: none;
+}
+
+/* Style for share popup */
+#sharePopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#sharePopup canvas {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#sharePopup button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#sharePopup button:hover {
+    background-color: #45a049;
+}
+
+

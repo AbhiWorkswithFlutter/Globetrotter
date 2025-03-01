@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOBETROTTER</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <h1>GLOBETROTTER</h1>
+        </div>
+        <div id="register" class="form-container">
+            <input type="text" id="username" placeholder="Enter Username">
+            <button onclick="registerUser()">Register</button>
+        </div>
+        <div id="menu" class="hidden">
+            <button onclick="showProfile()">View Profile</button>
+            <button onclick="startGame()">Start New Game</button>
+            <button onclick="challengeFriend()">Challenge a Friend</button>
+        </div>
+        <div id="content"></div>
+    </div>
+
+    <!-- Hidden Share Popup for Challenging a Friend -->
+    <div id="sharePopup" class="hidden">
+        <h2>Challenge a Friend</h2>
+        <canvas id="shareImageCanvas" width="300" height="300"></canvas>
+        <p>Invite your friend to join and see your score!</p>
+        <a id="whatsappInviteLink" href="#" target="_blank">
+            <button>Share on WhatsApp</button>
+        </a>
+        <button onclick="closeSharePopup()">Close</button>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

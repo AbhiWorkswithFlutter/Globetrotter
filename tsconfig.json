@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "module": "CommonJS",
+        "outDir": "./lib",
+        "rootDir": "./Backend",
+        "sourceMap": true,
+        "incremental": true,
+        "resolveJsonModule": true,
+        "tsBuildInfoFile": "./lib/.tsbuildinfo",
+        "skipLibCheck": true,
+        "esModuleInterop": true
+    }
+}
