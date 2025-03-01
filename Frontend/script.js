@@ -4,7 +4,7 @@ let currentDestination = {}; // Store the current destination for the question
 // Fetch a single random destination from the backend
 async function fetchDestination() {
     try {
-        const response = await fetch('http://localhost:8080/api/games/getQuestion'); // Update with your correct URL
+        const response = await fetch('https://globetrotter-urtb.onrender.com/api/games/getQuestion'); // Update with your correct URL
         const data = await response.json();
         console.log('API Response:', data[0]); // Log the response to check the structure
 
@@ -42,7 +42,7 @@ async function registerUser() {
     }
 
     try {
-        const response = await fetch(`http://localhost:8080/api/players/getUser?username=${username}`);
+        const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${username}`);
         // Update with your correct API
         console.log("response", response)
         if (!response.ok) {
@@ -57,7 +57,7 @@ async function registerUser() {
         } else {
 
             try {
-                const response = await fetch('http://localhost:8080/api/players/createUser', {
+                const response = await fetch('https://globetrotter-urtb.onrender.com/api/players/createUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ async function showProfile() {
     }
 
     try {
-        const response = await fetch(`http://localhost:8080/api/players/getUser?username=${user[0].username}`);
+        const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${user[0].username}`);
         // Update with your correct API
         console.log("response", response)
         if (!response.ok) {
@@ -221,7 +221,7 @@ async function endGame() {
     // Update highest score if necessary
     if (user.currentScore > user[0].highestscore) {
 
-        await fetch('http://localhost:8080/api/players/updateHigestScore', {
+        await fetch('https://globetrotter-urtb.onrender.com/api/players/updateHigestScore', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -297,7 +297,7 @@ function createInviteLink() {
         console.error("User data is missing for invite.");
         return;
     }
-    const inviteLink = `http://localhost:5500/?inviter=${encodeURIComponent(user[0].username)}&score=${user[0].currentScore}`;
+    const inviteLink = `https://globetrotter-urtb.onrender.com/?inviter=${encodeURIComponent(user[0].username)}&score=${user[0].currentScore}`;
 
 
     const inviteMessage = `Hey! Join me in playing this awesome game! My score is ${user[0].currentScore}. Play here: ${inviteLink}`;
@@ -365,7 +365,7 @@ async function updateUI() {
     if (storedUser) {
         try {
             // Fetch the latest user data from the backend
-            const response = await fetch(`http://localhost:8080/api/players/getUser?username=${storedUser.username}`);
+            const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${storedUser.username}`);
             console.log("asd", storedUser.username)
             if (!response.ok) throw new Error("Failed to fetch user details");
             console.log("b", response)
