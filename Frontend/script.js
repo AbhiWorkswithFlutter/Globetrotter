@@ -55,11 +55,11 @@ async function registerUser() {
     }
 
     try {
-        // document.getElementById("menu").classList.remove("hidden");
+        document.getElementById("loader").classList.remove("hidden");
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${username}`);
         console.log("response", response)
         if (!response.ok) {
-            document.getElementById("menu").classList.add("hidden");
+            document.getElementById("loader").classList.add("hidden");
             throw new Error('Failed to fetch user profile');
         }
 
@@ -67,7 +67,7 @@ async function registerUser() {
         console.log('User profile:', userData);
 
         if (userData.length > 0) {
-            document.getElementById("menu").classList.add("hidden");
+            document.getElementById("loader").classList.add("hidden");
             alert("User Name already exists, please try with other user name.")
         } else {
 
@@ -95,7 +95,7 @@ async function registerUser() {
 
                 user = userData; 
                 localStorage.setItem("user", JSON.stringify(user));
-                document.getElementById("menu").classList.add("hidden");
+                document.getElementById("loader").classList.add("hidden");
                 updateUI();
             } catch (error) {
                 console.error('Error registering user:', error);
