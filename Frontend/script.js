@@ -5,8 +5,6 @@ const params = new URLSearchParams(window.location.search);
 
 if(params.get('inviter') && params.get('score')){
     document.getElementById("invite").classList.remove("hidden")
-    console.log(params.get('inviter')); 
-    console.log(params.get('score')); 
     document.getElementById("user1").innerText = params.get('inviter')
     document.getElementById("highscore").innerText = params.get('score')
 }
@@ -27,7 +25,6 @@ async function fetchDestination() {
 
         // Set current destination
         currentDestination = data[0];
-        console.log("Fetched Destination:", currentDestination);
     } catch (error) {
         console.error('Error fetching destination:', error);
         document.getElementById('content').innerHTML = 'Failed to load destination.';
@@ -57,14 +54,13 @@ async function registerUser() {
     try {
         document.getElementById("loader").classList.remove("hidden");
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${username}`);
-        console.log("response", response)
+       
         if (!response.ok) {
             document.getElementById("loader").classList.add("hidden");
             throw new Error('Failed to fetch user profile');
         }
 
         const userData = await response.json();
-        console.log('User profile:', userData);
 
         if (userData.length > 0) {
             document.getElementById("loader").classList.add("hidden");
@@ -91,7 +87,6 @@ async function registerUser() {
                 }
 
                 const userData = await response.json();
-                console.log('User registered:', userData);
 
                 user = userData; 
                 localStorage.setItem("user", JSON.stringify(user));
@@ -116,7 +111,6 @@ async function registerUser() {
 
 // Show user profile
 async function showProfile() {
-    console.log("userqq", JSON.stringify(user))
     if (!user || !user[0].username) {
         alert("No user found! Please register.");
         return;
@@ -124,13 +118,12 @@ async function showProfile() {
 
     try {
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${user[0].username}`);
-        console.log("response", response)
+        
         if (!response.ok) {
             throw new Error('Failed to fetch user profile');
         }
 
         const userData = await response.json();
-        console.log('User profile:', userData);
 
         document.getElementById("content").innerHTML = `
             <h2>Profile</h2>
@@ -160,8 +153,6 @@ async function startGame() {
 
     }
     await fetchDestination(); 
-
-    console.log("Current Destination:", currentDestination);
 
     if (!currentDestination || !Array.isArray(currentDestination.clues)) {
         console.error('Clues are not available or not in the correct format');
@@ -226,8 +217,6 @@ async function submitAnswer(selectedAnswer) {
 // End the game and update high scores
 async function endGame() {
     alert(`Game Over! Your score: ${user.currentScore}`);
-    console.log(user)
-    console.log("hi", user.highestscore)
 
     // Update highest score if necessary
     if (user.currentScore > user[0].highestscore) {
@@ -246,7 +235,7 @@ async function endGame() {
             })
         });
 
-        user.highestscore = user.currentScore;
+        user[0].highestscore = user.currentScore;
         localStorage.setItem("user", JSON.stringify(user));
         alert("Congratulations! You've set a new highest score!");
     } else {
@@ -286,7 +275,6 @@ function generateShareImage() {
 
     ctx.fillStyle = '#4CAF50'; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    console.log("fghj",user)
     if (!user || !user[0].username ) {
         console.error("User data is missing.");
         return;
@@ -364,17 +352,15 @@ function logoutUser() {
 async function updateUI() {
     // Check if a user is stored in localStorage
     let storedUser = JSON.parse(localStorage.getItem("user"));
-    console.log("str", storedUser)
 
     if (storedUser) {
         try {
             // Fetch the latest user data from the backend
             const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${storedUser.username}`);
-            console.log("asd", storedUser.username)
+            
             if (!response.ok) throw new Error("Failed to fetch user details");
-            console.log("b", response)
+           
             user = await response.json(); 
-            console.log("user", user)
             localStorage.setItem("user", JSON.stringify(user)); 
 
            
