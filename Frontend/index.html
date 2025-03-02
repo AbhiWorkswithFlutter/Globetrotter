@@ -21,6 +21,13 @@
             <button onclick="challengeFriend()">Challenge a Friend</button>
         </div>
         <div id="content"></div>
+   
+    </div>
+    <div id="loader" class="loader hidden">Loading...Please wait!!! This may take some time due to slow server.</div>
+    <div id="invite" class="invite hidden">
+        <p>This is an Invite link from <span id="user1" class="highlight"></span></p>
+        <p>with Highest Score <span class="highlight" id="highscore"></span></p>
+        <button style="width: fit-content;" onclick="closeInvite()">Play Game!</button>
     </div>
 
     <div id="sharePopup" class="hidden">

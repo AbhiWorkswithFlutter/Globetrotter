@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    background: linear-gradient(to right, #5fa2ff, #7ba4fe);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -72,6 +72,33 @@ button {
     border-radius: 8px;
     font-size: 18px;
     transition: all 0.3s ease;
+}
+.loader {
+    position: absolute;
+    z-index: 999999;
+    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding-top: 47vh;
+}
+
+.invite{
+    position: absolute;
+    z-index: 999999;
+    backdrop-filter: blur(10px);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding-top: 47vh;
+    
+}
+
+.highlight {
+    background: tan;
+    color: black;
+    font-weight: 800;
+    padding: 2px;
 }
 
 button:hover {

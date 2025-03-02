@@ -1,5 +1,19 @@
 let user = JSON.parse(localStorage.getItem("user")) || null;
 let currentDestination = {}; // Store the current destination for the question
+const params = new URLSearchParams(window.location.search);
+
+
+if(params.get('inviter') && params.get('score')){
+    document.getElementById("invite").classList.remove("hidden")
+    console.log(params.get('inviter')); 
+    console.log(params.get('score')); 
+    document.getElementById("user1").innerText = params.get('inviter')
+    document.getElementById("highscore").innerText = params.get('score')
+}
+
+function closeInvite() {
+    document.getElementById("invite").classList.add("hidden")
+}
 
 // Fetch destination from the backend
 async function fetchDestination() {
@@ -21,16 +35,16 @@ async function fetchDestination() {
 }
 
 
-function updateUI() {
-    if (user) {
-        document.getElementById("register").classList.add("hidden");
-        document.getElementById("menu").classList.remove("hidden");
-        document.getElementById("content").innerHTML = `
-            <p>Welcome back, ${user.username}!</p>
-            <p>Your highest score: ${user.highestScore}</p>
-        `;
-    }
-}
+// function updateUI() {
+//     if (user) {
+//         document.getElementById("register").classList.add("hidden");
+//         document.getElementById("menu").classList.remove("hidden");
+//         document.getElementById("content").innerHTML = `
+//             <p>Welcome back, ${user.username}!</p>
+//             <p>Your highest score: ${user.highestScore}</p>
+//         `;
+//     }
+// }
 
 // Register a new user
 async function registerUser() {
@@ -41,9 +55,11 @@ async function registerUser() {
     }
 
     try {
+        // document.getElementById("menu").classList.remove("hidden");
         const response = await fetch(`https://globetrotter-urtb.onrender.com/api/players/getUser?username=${username}`);
         console.log("response", response)
         if (!response.ok) {
+            document.getElementById("menu").classList.add("hidden");
             throw new Error('Failed to fetch user profile');
         }
 
@@ -51,6 +67,7 @@ async function registerUser() {
         console.log('User profile:', userData);
 
         if (userData.length > 0) {
+            document.getElementById("menu").classList.add("hidden");
             alert("User Name already exists, please try with other user name.")
         } else {
 
@@ -78,7 +95,7 @@ async function registerUser() {
 
                 user = userData; 
                 localStorage.setItem("user", JSON.stringify(user));
-
+                document.getElementById("menu").classList.add("hidden");
                 updateUI();
             } catch (error) {
                 console.error('Error registering user:', error);
@@ -229,7 +246,7 @@ async function endGame() {
             })
         });
 
-        user.highestScore = user.currentScore;
+        user.highestscore = user.currentScore;
         localStorage.setItem("user", JSON.stringify(user));
         alert("Congratulations! You've set a new highest score!");
     } else {
@@ -251,6 +268,7 @@ function shuffle(array) {
 
 
 function generateShareImage() {
+    user = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):user;
     const canvas = document.getElementById('shareImageCanvas');
 
     if (!canvas) {
@@ -268,7 +286,7 @@ function generateShareImage() {
 
     ctx.fillStyle = '#4CAF50'; 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+    console.log("fghj",user)
     if (!user || !user[0].username ) {
         console.error("User data is missing.");
         return;
@@ -286,10 +304,10 @@ function createInviteLink() {
         console.error("User data is missing for invite.");
         return;
     }
-    const inviteLink = `https://globetrotter-urtb.onrender.com/?inviter=${encodeURIComponent(user[0].username)}&score=${user[0].currentScore}`;
+    const inviteLink = `https://globetrotter-1-u2s4.onrender.com/?inviter=${encodeURIComponent(user[0].username)}&score=${user[0].highestscore}`;
 
 
-    const inviteMessage = `Hey! Join me in playing this awesome game! My score is ${user[0].currentScore}. Play here: ${inviteLink}`;
+    const inviteMessage = `Hey! Join me in playing this awesome game! My score is ${user[0].highestscore}. Play here: ${inviteLink}`;
     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(inviteMessage)}`;
     document.getElementById('whatsappInviteLink').href = whatsappLink;
 }
