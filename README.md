@@ -17,10 +17,10 @@ User-friendly interface with a simple yet engaging experience.
 TypeScript for strong typing and better development experience.
 Node.js & Express to handle requests and serve APIs.
 MongoDB for efficient and flexible data storage.
-Model-View-Controller (MVC) Design Pattern to handle routing and requests:
-Model: Handles the database schema and data operations.
-View: Controls the user-facing part (served as HTML).
-Controller: Manages the business logic and routes.
+**Controller-Service-Repository Design Pattern** to handle routing and requests:
+**Router layer** handels the incoming request from the middleware mentioned in index.
+**Controller layer** receive request from router and interacts with service lauer.
+**Service layer** handels all the manipulation and logical part with the help of Dao.
 
 **Frontend**
 HTML, CSS, and JavaScript for the user interface.
@@ -35,7 +35,7 @@ HTML, CSS, and JavaScript for the user interface.
 
 **Features & Architecture**
 Backend
-The backend is built using Express.js and follows the Model-View-Controller (MVC) design pattern for efficient routing and request handling.
+The backend is built using Express.js and follows the Controller-Service-Repository design pattern for efficient routing and request handling.
 Database Schemas: Designed to store cryptic clues, destination details, and user progress.
 APIs: Expose endpoints for clue retrieval, answer validation, and unlocking destination trivia.
 Frontend
